@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>StartHere.qml</file>
+        <file>artwork/watermark.png</file>
+        <file>artwork/Qt-logo-medium.png</file>
+        <file>PackageInformation.qml</file>
+        <file>WizardStyle.qml</file>
+        <file>WizardStyleButton.qml</file>
+        <file>artwork/Aero.png</file>
+        <file>artwork/Classic.png</file>
+        <file>artwork/Mac.png</file>
+        <file>artwork/Modern.png</file>
+    </qresource>
+</RCC>
