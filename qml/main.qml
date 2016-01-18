@@ -66,7 +66,7 @@ ApplicationWindow{
 
 
     Component.onCompleted: {
-        domWriter.downloadPrebuilt()
+        domWriter.downloadPrebuilt("2.0.1")
     }
 
     QQmlDom{
@@ -90,8 +90,4 @@ ApplicationWindow{
              }
          }
      }
-
-
-
-
 }

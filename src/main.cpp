@@ -6,6 +6,9 @@
 
 #include "qqmldom.h"
 #include "qnetworkscanner.h"
+#include "qinstallerconfigure.h"
+#include "qinstallerpackage.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);

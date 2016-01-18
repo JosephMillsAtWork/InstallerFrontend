@@ -1,839 +1,13 @@
 #include "qqmldom.h"
-/**********************************************************************
-* config.xml
-**********************************************************************/
-QInstallerConfigure::QInstallerConfigure(QObject *parent):
-    QObject(parent),
-     m_name("Application"),
-     m_version("1.0.0"),
-     m_title("Title Shown in Installer"),
-     m_publisher("My Name"),
-     m_productUrl("http://aplcae.com"),
-     m_icon(),
-     m_installerApplicationIcon(),
-     m_installerWindowIcon(),
-     m_logo(),
-     m_watermark(),
-     m_banner(),
-     m_background(),
-     m_wizardStyle("Modern"),
-     m_wizardDefaultWidth(),
-     m_wizardDefaultHeight(),
-     m_titleColor("black"),
-     m_runProgram(),
-     m_runProgramArguments(),
-     m_runProgramDescription(),
-     m_startMenuDir("Qt"),
-     m_targetDir("@HomeDir@/Application"),
-     m_adminTargetDir(),
-     m_remoteRepositories(),
-     m_maintenanceToolName(),
-     m_maintenanceToolIniFile(),
-     m_removeTargetDir("@HomeDir@/Applciation"),
-     m_allowNonAsciiCharacters("False"),
-     m_repositorySettingsPageVisible("False"),
-     m_allowSpaceInPath("False"),
-     m_dependsOnLocalInstallerBinary("False"),
-     m_targetConfigurationFile(),
-     m_translations(),
-     m_urlQueryString(),
-     m_controlScript(),
-     m_createLocalRepository()
-{
-
-}
-
-QString QInstallerConfigure::rootDir() const
-{
-    return m_rootDir;
-}
-
-QString QInstallerConfigure::name() const
-{
-    return m_name;
-}
-
-QString QInstallerConfigure::version() const
-{
-    return m_version;
-}
-
-QString QInstallerConfigure::title() const
-{
-    return m_title;
-}
-
-QString QInstallerConfigure::publisher() const
-{
-    return m_publisher;
-}
-
-QString QInstallerConfigure::productUrl() const
-{
-    return m_productUrl;
-}
-
-QString QInstallerConfigure::icon() const
-{
-    return m_icon;
-}
-
-QString QInstallerConfigure::installerApplicationIcon() const
-{
-    return m_installerApplicationIcon;
-}
-
-QString QInstallerConfigure::installerWindowIcon() const
-{
-    return m_installerWindowIcon;
-}
-
-QString QInstallerConfigure::logo() const
-{
-    return m_logo;
-}
-
-QString QInstallerConfigure::watermark() const
-{
-    return m_watermark;
-}
-
-QString QInstallerConfigure::banner() const
-{
-    return m_banner;
-}
-
-QString QInstallerConfigure::background() const
-{
-    return m_banner;
-}
-
-QString QInstallerConfigure::wizardStyle() const
-{
-    return m_wizardStyle;
-}
-
-QString QInstallerConfigure::wizardDefaultWidth() const
-{
-    return m_wizardDefaultWidth;
-}
-
-QString QInstallerConfigure::wizardDefaultHeight() const
-{
-    return m_wizardDefaultHeight;
-}
-
-QString QInstallerConfigure::titleColor() const
-{
-    return m_title;
-}
-
-QString QInstallerConfigure::runProgram() const
-{
-    return m_runProgram;
-}
-
-QString QInstallerConfigure::runProgramArguments() const
-{
-    return m_runProgramArguments;
-}
-
-QString QInstallerConfigure::runProgramDescription() const
-{
-    return m_runProgramDescription;
-}
-
-QString QInstallerConfigure::startMenuDir() const
-{
-    return m_startMenuDir;
-}
-
-QString QInstallerConfigure::targetDir() const
-{
-    return m_targetDir;
-}
-
-QString QInstallerConfigure::adminTargetDir() const
-{
-    return m_adminTargetDir;
-}
-
-QString QInstallerConfigure::remoteRepositories() const
-{
-    return m_remoteRepositories;
-}
-
-QString QInstallerConfigure::maintenanceToolName() const
-{
-    return m_maintenanceToolName;
-}
-
-QString QInstallerConfigure::maintenanceToolIniFile() const
-{
-    return m_maintenanceToolIniFile;
-}
-
-QString QInstallerConfigure::removeTargetDir() const
-{
-    return m_removeTargetDir;
-}
-
-QString QInstallerConfigure::allowNonAsciiCharacters() const
-{
-    return m_allowNonAsciiCharacters;
-}
-
-QString QInstallerConfigure::repositorySettingsPageVisible() const
-{
-    return m_repositorySettingsPageVisible;
-}
-
-QString QInstallerConfigure::allowSpaceInPath() const
-{
-    return m_allowSpaceInPath;
-}
-
-QString QInstallerConfigure::dependsOnLocalInstallerBinary() const
-{
-    return m_dependsOnLocalInstallerBinary;
-}
-
-QString QInstallerConfigure::targetConfigurationFile() const
-{
-    return m_targetConfigurationFile;
-}
-
-QString QInstallerConfigure::translations() const
-{
-    return m_translations;
-}
-
-QString QInstallerConfigure::urlQueryString() const
-{
-    return m_urlQueryString;
-}
-
-QString QInstallerConfigure::controlScript() const
-{
-    return m_controlScript;
-}
-
-QString QInstallerConfigure::createLocalRepository() const
-{
-    return m_createLocalRepository;
-}
-
-void QInstallerConfigure::setRootDir(const QString &rootDir)
-{
-    if(m_rootDir == rootDir)
-        return;
-    m_rootDir = rootDir;
-    emit rootDirChanged();
-}
-
-
-
-/**************************************
- *
- *      SETTERS
- *
- ************************************/
-void QInstallerConfigure::setName(const QString &name)
-{
-    if(m_name == name )
-        return;
-    m_name = name;
-    emit nameChanged();
-}
-
-void QInstallerConfigure::setVersion(const QString &version)
-{
-    if(m_version == version)
-        return;
-    m_version = version;
-    emit versionChanged();
-}
-
-void QInstallerConfigure::setTitle(const QString &title)
-{
-    if(m_title == title)
-        return;
-    m_title = title;
-    emit titleChanged();
-}
-
-void QInstallerConfigure::setPublisher(const QString &publisher)
-{
-    if(m_publisher == publisher)
-        return;
-    m_publisher =publisher ;
-    emit publisherChanged() ;
-}
-
-void QInstallerConfigure::setProductUrl(const QString &productUrl)
-{
-    if(m_productUrl == productUrl )
-        return;
-    m_productUrl = productUrl;
-    emit productUrlChanged();
-}
-
-void QInstallerConfigure::setIcon(const QString &icon)
-{
-    if(m_icon == icon)
-        return;
-    m_icon = icon;
-    emit iconChanged();
-}
-
-void QInstallerConfigure::setInstallerApplicationIcon(const QString &installerApplicationIcon)
-{
-    if(m_installerApplicationIcon == installerApplicationIcon )
-        return;
-    m_installerApplicationIcon = installerApplicationIcon;
-    emit installerApplicationIconChanged();
-}
-
-void QInstallerConfigure::setInstallerWindowIcon(const QString &installerWindowIcon)
-{
-    if(m_installerWindowIcon == installerWindowIcon)
-        return;
-    m_installerWindowIcon = installerWindowIcon;
-    emit installerWindowIconChanged();
-
-}
-
-void QInstallerConfigure::setLogo(const QString &logo)
-{
-    if(m_logo == logo)
-        return;
-    m_logo = logo;
-    emit logoChanged();
-}
-
-void QInstallerConfigure::setWatermark(const QString &watermark)
-{
-    if(m_watermark ==watermark )
-        return;
-    m_watermark = watermark;
-    emit watermarkChanged();
-}
-
-void QInstallerConfigure::setBanner(const QString &banner)
-{
-    if(m_banner == banner)
-        return;
-    m_banner = banner;
-    emit bannerChanged();
-}
-
-void QInstallerConfigure::setBackground(const QString &background)
-{
-    if(m_background == background )
-        return;
-    m_background = background;
-    emit backgroundChanged();
-}
-
-void QInstallerConfigure::setWizardStyle(const QString &wizardStyle)
-{
-    if(m_wizardStyle == wizardStyle )
-        return;
-    m_wizardStyle = wizardStyle;
-    emit wizardStyleChanged();
-}
-
-void QInstallerConfigure::setWizardDefaultWidth(const QString &wizardDefaultWidth)
-{
-    if(m_wizardDefaultWidth == wizardDefaultWidth)
-        return;
-    m_wizardDefaultWidth = wizardDefaultWidth;
-    emit wizardDefaultWidthChanged();
-}
-
-void QInstallerConfigure::setWizardDefaultHeight(const QString &wizardDefaultHeight)
-{
-    if(m_wizardDefaultHeight ==  wizardDefaultHeight)
-        return;
-    m_wizardDefaultHeight = wizardDefaultHeight;
-    emit wizardDefaultHeightChanged();
-}
-
-void QInstallerConfigure::setTitleColor(const QString &titleColor)
-{
-    if(m_titleColor == titleColor)
-        return;
-    m_titleColor = titleColor;
-    emit titleColorChanged();
-}
-
-void QInstallerConfigure::setRunProgram(const QString &runProgram)
-{
-    if(m_runProgram == runProgram )
-        return;
-    m_runProgram = runProgram;
-    emit runProgramChanged();
-}
-
-void QInstallerConfigure::setRunProgramArguments(const QString &runProgramArguments)
-{
-    if(m_runProgramArguments == runProgramArguments )
-        return;
-    m_runProgramArguments = runProgramArguments;
-    emit runProgramArgumentsChanged();
-}
-
-void QInstallerConfigure::setRunProgramDescription(const QString &runProgramDescription)
-{
-    if(m_runProgramDescription == runProgramDescription)
-        return;
-    m_runProgramDescription = runProgramDescription;
-    emit runProgramDescriptionChanged();
-}
-
-void QInstallerConfigure::setStartMenuDir(const QString &startMenuDir)
-{
-    if(m_startMenuDir == startMenuDir)
-        return;
-    m_startMenuDir = startMenuDir;
-    emit startMenuDirChanged();
-}
-
-void QInstallerConfigure::setTargetDir(const QString &targetDir)
-{
-    if(m_targetDir == targetDir)
-        return;
-    m_targetDir = targetDir ;
-    emit targetDirChanged();
-}
-
-void QInstallerConfigure::setAdminTargetDir(const QString &adminTargetDir)
-{
-    if(m_adminTargetDir == adminTargetDir)
-        return;
-    m_adminTargetDir = adminTargetDir;
-    emit adminTargetDirChanged();
-}
-
-void QInstallerConfigure::setRemoteRepositories(const QString &remoteRepositories)
-{
-    if(m_remoteRepositories == remoteRepositories )
-        return;
-    m_remoteRepositories = remoteRepositories ;
-    emit remoteRepositoriesChanged();
-}
-
-void QInstallerConfigure::setMaintenanceToolName(const QString &maintenanceToolName)
-{
-    if(m_maintenanceToolName == maintenanceToolName )
-        return;
-    m_maintenanceToolName = maintenanceToolName;
-    emit maintenanceToolNameChanged();
-}
-
-void QInstallerConfigure::setMaintenanceToolIniFile(const QString &maintenanceToolIniFile)
-{
-    if(m_maintenanceToolIniFile == maintenanceToolIniFile )
-        return;
-    m_maintenanceToolIniFile = maintenanceToolIniFile ;
-    emit maintenanceToolIniFileChanged();
-}
-
-void QInstallerConfigure::setRemoveTargetDir(const QString &removeTargetDir)
-{
-    if(m_removeTargetDir == removeTargetDir)
-        return;
-    m_removeTargetDir = removeTargetDir;
-    emit removeTargetDirChanged();
-}
-
-void QInstallerConfigure::setAllowNonAsciiCharacters(const QString &allowNonAsciiCharacters)
-{
-    if(m_allowNonAsciiCharacters == allowNonAsciiCharacters)
-        return;
-    m_allowNonAsciiCharacters = allowNonAsciiCharacters;
-    emit allowNonAsciiCharactersChanged();
-}
-
-void QInstallerConfigure::setRepositorySettingsPageVisible(const QString &repositorySettingsPageVisible)
-{
-    if(m_repositorySettingsPageVisible == repositorySettingsPageVisible)
-        return;
-    m_repositorySettingsPageVisible = repositorySettingsPageVisible;
-    emit repositorySettingsPageVisibleChanged();
-}
-
-void QInstallerConfigure::setAllowSpaceInPath(const QString &allowSpaceInPath)
-{
-    if(m_allowSpaceInPath == allowSpaceInPath)
-        return;
-    m_allowSpaceInPath = allowSpaceInPath;
-    emit allowSpaceInPathChanged();
-}
-
-void QInstallerConfigure::setDependsOnLocalInstallerBinary(const QString &dependsOnLocalInstallerBinary)
-{
-    if(m_dependsOnLocalInstallerBinary == dependsOnLocalInstallerBinary)
-        return;
-    m_dependsOnLocalInstallerBinary = dependsOnLocalInstallerBinary;
-    emit dependsOnLocalInstallerBinaryChanged();
-}
-
-void QInstallerConfigure::setTargetConfigurationFile(const QString &targetConfigurationFile)
-{
-    if(m_targetConfigurationFile == targetConfigurationFile)
-        return;
-    m_targetConfigurationFile = targetConfigurationFile;
-    emit targetConfigurationFileChanged();
-}
-
-void QInstallerConfigure::setTranslations(const QString &translations)
-{
-    if(m_translations == translations)
-        return;
-    m_translations = translations ;
-    emit translationsChanged();
-}
-
-void QInstallerConfigure::setUrlQueryString(const QString &urlQueryString)
-{
-    if(m_urlQueryString == urlQueryString)
-        return;
-    m_urlQueryString = urlQueryString;
-    emit urlQueryStringChanged();
-}
-
-void QInstallerConfigure::setControlScript(const QString &controlScript)
-{
-    if(m_controlScript == controlScript)
-        return;
-    m_controlScript = controlScript;
-    emit controlScriptChanged();
-}
-
-void QInstallerConfigure::setCreateLocalRepository(const QString &createLocalRepository)
-{
-    if(m_createLocalRepository == createLocalRepository)
-        return;
-    m_createLocalRepository = createLocalRepository;
-    emit createLocalRepositoryChanged();
-}
-
-
-
-
-/**************************************************************************
- * Package.XML
- *************************************************************************/
-QInstallerPackage::QInstallerPackage(QObject *parent):
-    QObject(parent),
-    m_displayName(),
-    m_description(),
-    m_version(),
-    m_releaseDate(),
-    m_name(),
-    m_dependencies(),
-    m_autoDependOn(),
-    m_packageVirtual(),
-    m_sortingPriority(),
-    m_licenses(),
-    m_script(),
-    m_userInterfaces(),
-    m_translations(),
-    m_updateText(),
-    m_packageDefault(),
-    m_essential(),
-    m_forcedInstallation(),
-    m_replaces(),
-    m_downloadableArchives(),
-    m_requiresAdminRights()
-{
-
-}
-
-/*
- * Getters
- */
-
-QString QInstallerPackage::displayName() const
-{
-    return m_displayName;
-}
-
-QString QInstallerPackage::description() const
-{
-    return m_description;
-}
-
-QString QInstallerPackage::version() const
-{
-    return m_version;
-}
-
-QString QInstallerPackage::releaseDate() const
-{
-    return m_releaseDate;
-}
-
-QString QInstallerPackage::name() const
-{
-    return m_name;
-}
-
-QString QInstallerPackage::dependencies() const
-{
-    return m_dependencies;
-}
-
-QString QInstallerPackage::autoDependOn() const
-{
-    return m_autoDependOn;
-}
-
-QString QInstallerPackage::packageVirtual() const
-{
-    return m_packageVirtual;
-}
-
-QString QInstallerPackage::sortingPriority() const
-{
-    return m_sortingPriority;
-}
-
-QString QInstallerPackage::licenses() const
-{
-    return m_licenses;
-}
-
-QString QInstallerPackage::script() const
-{
-    return m_script;
-}
-
-QString QInstallerPackage::userInterfaces() const
-{
-    return m_userInterfaces;
-}
-
-QString QInstallerPackage::translations() const
-{
-    return m_translations;
-}
-
-QString QInstallerPackage::updateText() const
-{
-    return m_updateText;
-}
-
-QString QInstallerPackage::packageDefault() const
-{
-    return m_packageDefault;
-}
-
-QString QInstallerPackage::essential() const
-{
-    return m_essential;
-}
-
-QString QInstallerPackage::forcedInstallation() const
-{
-    return m_forcedInstallation;
-}
-
-QString QInstallerPackage::replaces() const
-{
-    return m_replaces;
-}
-
-QString QInstallerPackage::downloadableArchives() const
-{
-    return m_downloadableArchives;
-}
-
-QString QInstallerPackage::requiresAdminRights() const
-{
-    return m_requiresAdminRights;
-}
-
-
-/*
- * Setters
- */
-
-void QInstallerPackage::setDisplayName(const QString &displayName)
-{
-    if(m_displayName == displayName)
-        return;
-    m_displayName = displayName ;
-    emit displayNameChanged();
-}
-
-void QInstallerPackage::setDescription(const QString &description)
-{
-    if(m_description == description)
-        return;
-    m_description = description;
-    emit  descriptionChanged();
-}
-
-void QInstallerPackage::setVersion(const QString &version)
-{
-    if(m_version == version)
-        return;
-    m_version = version;
-    emit versionChanged(); ;
-}
-
-void QInstallerPackage::setReleaseDate(const QString &releaseDate)
-{
-    if(m_releaseDate == releaseDate)
-        return;
-    m_releaseDate = releaseDate;
-    emit releaseDateChanged(); ;
-}
-
-void QInstallerPackage::setName(const QString &name)
-{
-    if(m_name == name)
-        return;
-    m_name = name;
-    emit nameChanged(); ;
-}
-
-void QInstallerPackage::setDependencies(const QString &dependencies)
-{
-    if(m_dependencies == dependencies)
-        return;
-    m_dependencies = dependencies;
-    emit dependenciesChanged(); ;
-}
-
-void QInstallerPackage::setAutoDependOn(const QString &autoDependOn)
-{
-    if(m_autoDependOn == autoDependOn)
-        return;
-    m_autoDependOn = autoDependOn;
-    emit autoDependOnChanged(); ;
-}
-
-void QInstallerPackage::setPackageVirtual(const QString &packageVirtual)
-{
-    if(m_packageVirtual == packageVirtual )
-        return;
-    m_packageVirtual = packageVirtual ;
-    emit packageVirtualChanged(); ;
-}
-
-void QInstallerPackage::setSortingPriority(const QString &sortingPriority)
-{
-    if(m_sortingPriority == sortingPriority )
-        return;
-    m_sortingPriority = sortingPriority ;
-    emit sortingPriorityChanged() ;
-}
-
-void QInstallerPackage::setLicenses(const QString &licenses)
-{
-    if(m_licenses == licenses)
-        return;
-    m_licenses = licenses;
-    emit licensesChanged(); ;
-}
-
-void QInstallerPackage::setScript(const QString &script)
-{
-    if(m_script == script )
-        return;
-    m_script = script;
-    emit scriptChanged(); ;
-}
-
-void QInstallerPackage::setUserInterfaces(const QString &userInterfaces)
-{
-    if(m_userInterfaces == userInterfaces)
-        return;
-    m_userInterfaces = userInterfaces;
-    emit userInterfacesChanged(); ;
-}
-
-void QInstallerPackage::setTranslations(const QString &translations)
-{
-    if(m_translations == translations)
-        return;
-    m_translations = translations;
-    emit translationsChanged(); ;
-}
-
-void QInstallerPackage::setUpdateText(const QString &updateText)
-{
-    if(m_updateText == updateText)
-        return;
-    m_updateText = updateText;
-    emit updateTextChanged(); ;
-}
-
-void QInstallerPackage::setPackageDefault(const QString &packageDefault)
-{
-    if(m_packageDefault == packageDefault)
-        return;
-    m_packageDefault = packageDefault;
-    emit packageDefaultChanged(); ;
-}
-
-void QInstallerPackage::setEssential(const QString &essential)
-{
-    if(m_essential == essential)
-        return;
-    m_essential = essential;
-    emit essentialChanged(); ;
-}
-
-void QInstallerPackage::setForcedInstallation(const QString &forcedInstallation)
-{
-    if(m_forcedInstallation == forcedInstallation)
-        return;
-    m_forcedInstallation = forcedInstallation;
-    emit forcedInstallationChanged(); ;
-}
-
-void QInstallerPackage::setReplaces(const QString &replaces)
-{
-    if(m_replaces == replaces )
-        return;
-    m_replaces = replaces;
-    emit replacesChanged();
-}
-
-void QInstallerPackage::setDownloadableArchives(const QString &downloadableArchives)
-{
-    if(m_downloadableArchives == downloadableArchives )
-        return;
-    m_downloadableArchives = downloadableArchives;
-    emit downloadableArchivesChanged();
-}
-
-void QInstallerPackage::setRequiresAdminRights(const QString &requiresAdminRights)
-{
-    if(m_requiresAdminRights ==  requiresAdminRights)
-        return;
-    m_requiresAdminRights = requiresAdminRights;
-    emit requiresAdminRightsChanged(); ;
-}
-
-
-
-
-
-
-
-/*******************************************************************************
- *  QDom and other functions that are needed to make each of the xml files and
- *  run all the qprocess things like binary creator and make static qt
- * ****************************************************************************/
 
 QQMlDom::QQMlDom(QObject *parent) : QObject(parent)
 {
     connect(this,SIGNAL(error(QString)),this,SLOT(handleError(QString)));
+}
+
+QString QQMlDom::errorString()
+{
+    return m_errorString;
 }
 
 bool QQMlDom::staticBuild()
@@ -849,41 +23,43 @@ void QQMlDom::setStaticBuild(const bool &staticBuild)
     emit staticBuildChanged();
 }
 
-void QQMlDom::downloadPrebuilt() const
+void QQMlDom::downloadPrebuilt(const QString version)
 {
-     QSysInfo info;
-//     QString downloadFile;
-     QString os;
-     os = info.kernelType();
-//     QString arch = info.buildCpuArchitecture();
+    QSysInfo info;
+    QString os;
+    QString system;
+    os = info.kernelType().toLatin1();
+    QString arch = info.buildCpuArchitecture();
 
-qDebug() << os;
-//     if(os == "linux"){
-//         qDebug() << linux
-//     }else if (o)
-
-//     switch (arch) {
-//     case "x86_64":
-//         downloadFile = "";
-//         break;
-//     case i386:
-//         downloadFile = "";
-//         break;
-
-//     default:
-//         break;
-//     }
-
-
-
-
+    if (os == "darwin")
+    {
+        system = "mac";
+    }
+    else if ( os == "linux")
+    {
+        if(arch == "x86_64"){
+            system = "linux64";
+            qDebug() << "Suggested Donload  qt-installer-framework-opensource-2.0.1-x64.run";
+        }
+        //FIXME error check for arm and what not
+        else
+        {
+            system = "linux32";
+            qDebug() << "Suggested Donload  qt-installer-framework-opensource-2.0.1-x86.run";
+        }
+    }
+    else if (os == "wince" || os == "winnt")
+    {
+        system = "doz";
+    }
 }
+
 
 QStringList QQMlDom::getPrebuiltOptions()
 {
     QStringList versions;
     versions.clear();
-    versions << "2.0.1" << "2.0.0" << "1.5.0";
+    versions << "2.0.1" << "2.0.0";
     return versions;
 }
 
@@ -981,9 +157,7 @@ void QQMlDom::writeConfigPage(const QString path)
        QTextStream stream(&instalerFile);
        stream << m_document.toString();
        instalerFile.close();
-
    }
-
 }
 
 void QQMlDom::writePackagePage(const QString path)
@@ -1087,8 +261,6 @@ void QQMlDom::mkDefaultDirs(const QString rootDir,const QString projectName,cons
             error("could not make online dir");
         }
 
-
-
         //  make the files
         // FIXME make these bool and not void
         makeProFile(rootDir,appName);
@@ -1129,9 +301,10 @@ QStringList QQMlDom::getDefaultConfigXml()
 QStringList QQMlDom::getDefaultPackageXml()
 {
     QStringList defaultPackageXml ;
-    defaultPackageXml <<"DisplayName" <<"Description" <<"Version" <<"ReleaseDate" <<"Name" <<"Dependencies" <<"AutoDependOn" <<"Virtual"
-    <<"SortingPriority" <<"Licenses" <<"Script" <<"UserInterfaces" <<"Translations" <<"UpdateText" <<"Default"
-    <<"Essential" <<"ForcedInstallation" <<"Replaces" <<"DownloadableArchives" <<"RequiresAdminRights";
+    defaultPackageXml <<
+                 "DisplayName" << "Description" << "Version" << "ReleaseDate" << "Name" << "Dependencies" << "AutoDependOn" << "Virtual"
+              << "SortingPriority" << "Licenses" << "Script" << "UserInterfaces" << "Translations" << "UpdateText" << "Default"
+              << "Essential" << "ForcedInstallation" << "Replaces" << "DownloadableArchives" << "RequiresAdminRights";
     return defaultPackageXml;
 }
 
@@ -1140,7 +313,8 @@ void QQMlDom::makeProFile(const QString rootDir, const QString projectName)
 
     // This is the Default Templete not the end product
     QStringList proTemplete;
-            proTemplete << "TEMPLATE = aux" <<  "INSTALLER = installer" <<  "INPUT = $$PWD/config/config.xml $$PWD/packages"
+            proTemplete <<
+                        "TEMPLATE = aux" <<  "INSTALLER = installer" <<  "INPUT = $$PWD/config/config.xml $$PWD/packages"
                         << "example.input = INPUT" << "example.output = $$INSTALLER" <<  "example.commands = binarycreator -c $$PWD/config/config.xml -p $$PWD/packages ${QMAKE_FILE_OUT}"
                         << "example.CONFIG += target_predeps no_link combine" <<  "QMAKE_EXTRA_COMPILERS += example"
                         << "OTHER_FILES = README";
@@ -1254,7 +428,6 @@ void QQMlDom::addependAttributeById(QDomElement nDocument, QString element, QStr
 
 void QQMlDom::createNewNode(QDomDocument nDocument , QDomElement nElement, QString parent, QString nodeName)
 {
-
     QDomNodeList nList = nElement.elementsByTagName(parent);
     QDomNode nNode = nList.at(0);
     QDomElement nnElement = nNode.toElement();
@@ -1281,7 +454,9 @@ void QQMlDom::removeNodeById(QDomElement nDocument, QString element)
 
 void QQMlDom::handleError(const QString err)
 {
-    //FIXME make errorString
-    qDebug() << err;
+    if(m_errorString == err )
+        return;
+    m_errorString = err;
+    emit errorStringChanged();
 }
 

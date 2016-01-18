@@ -5,7 +5,9 @@ CONFIG += c++11
 
 SOURCES += src/main.cpp \
     src/qqmldom.cpp \
-    src/qnetworkscanner.cpp
+    src/qnetworkscanner.cpp \
+    src/qinstallerpackage.cpp \
+    src/qinstallerconfigure.cpp
 
 RESOURCES += qml/qml.qrc
 
@@ -17,5 +19,7 @@ include(deployment.pri)
 
 HEADERS += \
     src/qqmldom.h \
-    src/qnetworkscanner.h
+    src/qnetworkscanner.h \
+    src/qinstallerpackage.h \
+    src/qinstallerconfigure.h
 
