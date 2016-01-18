@@ -4,7 +4,8 @@ QT += qml quick xml core
 CONFIG += c++11
 
 SOURCES += src/main.cpp \
-    src/qqmldom.cpp
+    src/qqmldom.cpp \
+    src/qnetworkscanner.cpp
 
 RESOURCES += qml/qml.qrc
 
@@ -15,5 +16,6 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    src/qqmldom.h
+    src/qqmldom.h \
+    src/qnetworkscanner.h
 

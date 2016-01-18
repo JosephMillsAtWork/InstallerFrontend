@@ -51,32 +51,6 @@ Item {
             text:qsTr("\nPlease Provide the Needed information below to Create a Configuration\n")
             font.pixelSize: 16
         }
-        RowLayout{
-            Layout.preferredWidth: parent.width / 1.07
-            Layout.alignment: Qt.AlignHCenter
-            Layout.fillWidth: true
-            Label{
-                id: whereSource
-                text: qsTr("Where is the Source Code ?")
-
-            }
-            TextField{
-                id: sourcecodeDir
-                Layout.preferredWidth: appName.width - outSource.paintedWidth
-                Layout.alignment: Qt.AlignHCenter
-            }
-            Button{
-                id:openFileDialog
-                text: qsTr("Browse Source...")
-                onClicked: {
-                }
-            }
-
-        }
-
-
-
-
 
 
         RowLayout{
@@ -92,6 +66,7 @@ Item {
                 id: outDir
                 Layout.preferredWidth: appName.width - outSource.paintedWidth
                 Layout.alignment: Qt.AlignHCenter
+                text: buildDefaultDir
 
             }
             Button{
@@ -118,77 +93,23 @@ Item {
                 text: configXml.name
             }
         }
-        // Version
 
-
+        // PACKAGE name
         RowLayout{
             Layout.preferredWidth: parent.width / 1.07
             Layout.alignment: Qt.AlignHCenter
             Label{
-                id: versionApp
-                text: qsTr("Version ")
+                text: qsTr("Name of the project  ")
 
             }
             TextField{
-                id: versionName
-                Layout.preferredWidth: appName.width
+                id: packageName
+                Layout.preferredWidth: welcomeColoumn.width / 1.07 - nameApp.paintedWidth
                 Layout.alignment: Qt.AlignRight
-                text: configXml.version
+                text: "org."+configXml.name + ".something"   //configXml.productUrl
             }
         }
 
-        //TITLE
-
-        RowLayout{
-            Layout.preferredWidth: parent.width / 1.07
-            Layout.alignment: Qt.AlignHCenter
-            Label{
-                id: titleApp
-                text: qsTr("Title ")
-
-            }
-            TextField{
-                id: titleName
-                Layout.preferredWidth: appName.width
-                Layout.alignment: Qt.AlignRight
-                text: configXml.title
-            }
-        }
-
-        //    Publisher
-        RowLayout{
-            Layout.preferredWidth: parent.width / 1.07
-            Layout.alignment: Qt.AlignHCenter
-            Label{
-                id:publisherApp
-                text: qsTr("Publisher ")
-
-            }
-            TextField{
-                id: publisherName
-                Layout.preferredWidth: appName.width
-                Layout.alignment: Qt.AlignRight
-                text: configXml.publisher
-            }
-        }
-
-        //StartMenuDir
-
-        RowLayout{
-            Layout.preferredWidth: parent.width / 1.07
-            Layout.alignment: Qt.AlignHCenter
-            Label{
-                id:startMenuApp
-                text: qsTr("Start Menu Dir ")
-
-            }
-            TextField{
-                id: startMenuName
-                Layout.preferredWidth: appName.width
-                Layout.alignment: Qt.AlignRight
-                text: configXml.startMenuDir
-            }
-        }
 
 
 
@@ -207,9 +128,19 @@ Item {
                 onClicked:{
                     // we need a error checker to make sure that the manditory
                     // properys are set.
-                    domWriter.writeConfigPage();
-//                    checkManditory();
-//                                    setAllElements();
+                    var Already = domWriter.dirExists(outDir.text+ "/"+appName.text +"/config")
+                    console.log(Already)
+                    if( Already === true ){
+                        console.log("Dir is there maybe remove or alter ?")
+                        errorDialog.open();
+                    }else{
+                        domWriter.mkDefaultDirs( outDir.text+"/"+ appName.text
+                                                 ,"packages/"+ packageName.text
+                                                 ,appName.text
+                                                )
+
+//                        domWriter.writeConfigPage(outDir.text+ "/"+appName.text +"/config/")
+                    }
                 }
             }
         }
@@ -256,6 +187,7 @@ Item {
 
 
 
+    // FOXME handle with C++
 function setAllElements(){
     // First thing we do is make a default templete for config.xml
     //FIXME This SHOULD HAPPEN BEFORE THIS

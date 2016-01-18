@@ -5,6 +5,11 @@
 #include <QtXml/QDomElement>
 #include <QtXml/QDomNodeList>
 #include <QtXml/QDomNode>
+#include <QtXml/QtXml>
+#include <QtWebKit/QWebElement>
+#include <QNetworkRequest>
+#include <QNetworkAccessManager>
+
 
 #include <QFile>
 #include <QList>
@@ -13,13 +18,21 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QObject>
+#include <QDir>
+#include <QSettings>
 
+
+#include "qnetworkscanner.h"
 
 /**********************************************************************
 * config.xml
 **********************************************************************/
 class QInstallerConfigure : public QObject{
     Q_OBJECT
+
+    Q_PROPERTY(QString rootDir READ rootDir WRITE setRootDir NOTIFY rootDirChanged)
+
+
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString version READ version WRITE setVersion NOTIFY versionChanged)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
@@ -61,6 +74,8 @@ public:
     /*******
  *   Getters
  *******/
+    QString rootDir()const;
+
     QString name()const;
     QString version()const;
     QString title()const;
@@ -102,6 +117,9 @@ public:
     /*********
 * Setters
 *********/
+    void setRootDir(const QString &rootDir);
+
+
     void setName(const QString &name);
     void setVersion(const QString &version);
     void setTitle(const QString &title);
@@ -142,6 +160,8 @@ public:
 
 
 signals:
+    void rootDirChanged();
+
     void nameChanged();
     void versionChanged();
     void titleChanged();
@@ -178,6 +198,7 @@ signals:
     void controlScriptChanged();
     void createLocalRepositoryChanged();
 private:
+    QString m_rootDir;
 
     QString m_name;
     QString m_version;
@@ -223,18 +244,126 @@ private:
  * Package.XML
  *************************************************************************/
 class QInstallerPackage : public QObject{
+
     Q_OBJECT
+    Q_PROPERTY(QString displayName READ displayName WRITE setDisplayName NOTIFY displayNameChanged)
+    Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY descriptionChanged)
+    Q_PROPERTY(QString version READ version WRITE setVersion NOTIFY versionChanged)
+    Q_PROPERTY(QString releaseDate READ releaseDate WRITE setReleaseDate NOTIFY releaseDateChanged)
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(QString dependencies READ dependencies WRITE setDependencies NOTIFY dependenciesChanged)
+    Q_PROPERTY(QString autoDependOn READ autoDependOn WRITE setAutoDependOn NOTIFY autoDependOnChanged)
+    Q_PROPERTY(QString packageVirtual READ packageVirtual WRITE setPackageVirtual NOTIFY packageVirtualChanged)
+    Q_PROPERTY(QString sortingPriority READ sortingPriority WRITE setSortingPriority NOTIFY sortingPriorityChanged)
+    Q_PROPERTY(QString licenses READ licenses WRITE setLicenses NOTIFY licensesChanged)
+    Q_PROPERTY(QString script READ script WRITE setScript NOTIFY scriptChanged)
+    Q_PROPERTY(QString userInterfaces READ userInterfaces WRITE setUserInterfaces NOTIFY userInterfacesChanged)
+    Q_PROPERTY(QString translations READ translations WRITE setTranslations NOTIFY translationsChanged)
+    Q_PROPERTY(QString updateText READ updateText WRITE setUpdateText NOTIFY updateTextChanged)
+    Q_PROPERTY(QString packageDefault READ packageDefault WRITE setPackageDefault NOTIFY packageDefaultChanged)
+    Q_PROPERTY(QString essential READ essential WRITE setEssential NOTIFY essentialChanged)
+    Q_PROPERTY(QString forcedInstallation READ forcedInstallation WRITE setForcedInstallation NOTIFY forcedInstallationChanged)
+    Q_PROPERTY(QString replaces READ replaces WRITE setReplaces NOTIFY replacesChanged)
+    Q_PROPERTY(QString downloadableArchives READ downloadableArchives WRITE setDownloadableArchives NOTIFY downloadableArchivesChanged)
+    Q_PROPERTY(QString requiresAdminRights READ requiresAdminRights WRITE setRequiresAdminRights NOTIFY requiresAdminRightsChanged)
+
     explicit QInstallerPackage(QObject *parent = 0);
 
+    /*
+     * Getters
+     */
+
+    QString displayName()const;
+    QString description()const;
+    QString version()const;
+    QString releaseDate()const;
+    QString name()const;
+    QString dependencies()const;
+    QString autoDependOn()const;
+    QString packageVirtual()const;
+    QString sortingPriority()const;
+    QString licenses()const;
+    QString script()const;
+    QString userInterfaces()const;
+    QString translations()const;
+    QString updateText()const;
+    QString packageDefault()const;
+    QString essential()const;
+    QString forcedInstallation()const;
+    QString replaces()const;
+    QString downloadableArchives()const;
+    QString requiresAdminRights()const;
+
+
+
+    /*
+     * Setters
+     */
+    void setDisplayName(const QString &displayName);
+    void setDescription(const QString &description);
+    void setVersion(const QString &version);
+    void setReleaseDate(const QString &releaseDate);
+    void setName(const QString &name);
+    void setDependencies(const QString &dependencies);
+    void setAutoDependOn(const QString &autoDependOn);
+    void setPackageVirtual(const QString &packageVirtual);
+    void setSortingPriority(const QString &sortingPriority);
+    void setLicenses(const QString &licenses);
+    void setScript(const QString &script);
+    void setUserInterfaces(const QString &userInterfaces);
+    void setTranslations(const QString &translations);
+    void setUpdateText(const QString &updateText);
+    void setPackageDefault(const QString &packageDefault);
+    void setEssential(const QString &essential);
+    void setForcedInstallation(const QString &forcedInstallation);
+    void setReplaces(const QString &replaces);
+    void setDownloadableArchives(const QString &downloadableArchives);
+    void setRequiresAdminRights(const QString &requiresAdminRights);
 
 
 signals:
-
-
-
+    void displayNameChanged();
+    void descriptionChanged();
+    void versionChanged();
+    void releaseDateChanged();
+    void nameChanged();
+    void dependenciesChanged();
+    void autoDependOnChanged();
+    void packageVirtualChanged();
+    void sortingPriorityChanged();
+    void licensesChanged();
+    void scriptChanged();
+    void userInterfacesChanged();
+    void translationsChanged();
+    void updateTextChanged();
+    void packageDefaultChanged();
+    void essentialChanged();
+    void forcedInstallationChanged();
+    void replacesChanged();
+    void downloadableArchivesChanged();
+    void requiresAdminRightsChanged();
 private:
 
-
+    QString m_displayName;
+    QString m_description;
+    QString m_version;
+    QString m_releaseDate;
+    QString m_name;
+    QString m_dependencies;
+    QString m_autoDependOn;
+    QString m_packageVirtual;
+    QString m_sortingPriority;
+    QString m_licenses;
+    QString m_script;
+    QString m_userInterfaces;
+    QString m_translations;
+    QString m_updateText;
+    QString m_packageDefault;
+    QString m_essential;
+    QString m_forcedInstallation;
+    QString m_replaces;
+    QString m_downloadableArchives;
+    QString m_requiresAdminRights;
 
 };
 
@@ -249,24 +378,47 @@ private:
 class QQMlDom : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString binaryLoaction READ binaryLoaction WRITE setBinaryCreatorLocation NOTIFY binaryLoactionChanged)
+    Q_PROPERTY(bool staticBuild READ staticBuild WRITE setStaticBuild NOTIFY staticBuildChanged)
 
 
 public:
     explicit QQMlDom(QObject *parent = 0);
-     QDomDocument m_document;
 
 
-    Q_INVOKABLE void writeConfigPage();
+    bool staticBuild();
+    void setStaticBuild(const bool &staticBuild);
+
+
+    Q_INVOKABLE void downloadPrebuilt()const;
+    QStringList getPrebuiltOptions();
+
+
+    QString binaryLoaction()const;
+    void setBinaryCreatorLocation(const QString &binaryLoaction);
+    Q_INVOKABLE bool hasTheBinaryPath() const;
+
+    Q_INVOKABLE void writeConfigPage(const QString path);
+    Q_INVOKABLE void writePackagePage(const QString path);
     Q_INVOKABLE void checkConfigManditory(const QString &element, QString text);
 
-
-
-
-
+    Q_INVOKABLE bool dirExists(const QString dir);
     Q_INVOKABLE void copyBinary();
-    Q_INVOKABLE void mkDefaultDirs();
+    Q_INVOKABLE void mkDefaultDirs(const QString rootDir,const QString projectName,const QString appName);
 
 
+    Q_INVOKABLE bool createSubPackageComponent();
+
+
+
+    QStringList getDefaultConfigXml();
+    QStringList getDefaultPackageXml();
+    void makeProFile(const QString rootDir,const QString projectName);
+    void makeConfigFile(const QString rootDir,const QString projectName );
+    void makePackageFile(const QString rootDir,const QString projectName );
+    void makeREADMEFile(const QString rootDir,const QString projectName );
+    void makeQSFile(const QString rootDir,const QString projectName );
+    void makeLicenseFile(const QString rootDir,const QString projectName);
 
 
     // Q_INVOKABLE void writePackagePage();
@@ -274,17 +426,27 @@ public:
     // These are single removers and will break on multiple children
     void addependTextById(QDomDocument nDocument ,QString element,QString text);
     void addependAttributeById(QDomElement nDocument ,QString element,QString attribute);
+    void createNewNode(QDomDocument nDocument , QDomElement nElement, QString parent, QString nodeName);
+
 
     void removeDefaultNode(QDomElement nDocument ,QString element);
     void removeNodeById( QDomElement nDocument , QString element);
 
 signals:
     void error(QString);
+    void binaryLoactionChanged();
+    void staticBuildChanged();
+
+
 protected slots:
     void handleError(const QString err);
 
 
 private:
+    QDomDocument m_document;
+    QSettings m_binaryLoc;
+    QString m_binaryLocation;
+    bool m_staticBuild;
 };
 
 #endif // QQMLDOM_H
