@@ -1,5 +1,4 @@
 #include "qqmldom.h"
-
 QQMlDom::QQMlDom(QObject *parent) : QObject(parent)
 {
     connect(this,SIGNAL(error(QString)),this,SLOT(handleError(QString)));
@@ -184,7 +183,6 @@ void QQMlDom::writePackagePage(const QString path)
     QString installerPath = QString("%1%2").arg(path).arg("/package.xml");
     QFile instalerFile(installerPath);
 
-    // Create the root node
     if ( ! instalerFile.open(QFile::WriteOnly | QFile::Text) )
     {
         error("Could not open the Installer Configure File IE package.xml");
@@ -255,7 +253,6 @@ void QQMlDom::mkDefaultDirs(const QString rootDir,const QString projectName,cons
             error("could not make online dir");
         }
 
-
         if( !dir.mkpath(resource))
         {
             error("could not make online dir");
@@ -313,27 +310,29 @@ void QQMlDom::makeProFile(const QString rootDir, const QString projectName)
 
     // This is the Default Templete not the end product
     QStringList proTemplete;
-            proTemplete <<
-                        "TEMPLATE = aux" <<  "INSTALLER = installer" <<  "INPUT = $$PWD/config/config.xml $$PWD/packages"
-                        << "example.input = INPUT" << "example.output = $$INSTALLER" <<  "example.commands = binarycreator -c $$PWD/config/config.xml -p $$PWD/packages ${QMAKE_FILE_OUT}"
-                        << "example.CONFIG += target_predeps no_link combine" <<  "QMAKE_EXTRA_COMPILERS += example"
-                        << "OTHER_FILES = README";
+    proTemplete <<
+                   "TEMPLATE = aux" <<  "INSTALLER = installer" <<  "INPUT = $$PWD/config/config.xml $$PWD/packages"
+                << "example.input = INPUT" << "example.output = $$INSTALLER" <<  "example.commands = binarycreator -c $$PWD/config/config.xml -p $$PWD/packages ${QMAKE_FILE_OUT}"
+                << "example.CONFIG += target_predeps no_link combine" <<  "QMAKE_EXTRA_COMPILERS += example"
+                << "OTHER_FILES = README";
 
     QString proFileCanonical = QString("%1/%2%3").arg(rootDir,projectName).arg(".pro");
 
-
-//    qDebug() << proFileCanonical;
-
     QFile f(proFileCanonical);
-    if(f.open(QFile::WriteOnly|QFile::Text)){
-    QTextStream in(&f);
-    for (int i = 0 ; i < proTemplete.length(); i++){
-        in << proTemplete.at(i);
-        in << "\n";
+    if(f.open(QFile::WriteOnly|QFile::Text))
+    {
+        QTextStream in(&f);
+        for (int i = 0 ; i < proTemplete.length(); i++){
+            in << proTemplete.at(i);
+            in << "\n";
+        }
     }
-    }else{
+    else
+    {
+//        return false;
         error("Could not open the profile to write to") ;
     }
+    f.close();
 
 }
 
@@ -345,8 +344,10 @@ void QQMlDom::makeConfigFile(const QString rootDir, const QString projectName)
     if(f.open(QFile::WriteOnly|QFile::Text)){
 //        qDebug() << "Created the Config.xml file";
     }else{
+//        return false
         qDebug() << "Could not open the profile to write to" ;
     }
+    f.close();
 
 }
 
@@ -360,6 +361,7 @@ void QQMlDom::makePackageFile(const QString rootDir, const QString projectName)
     }else{
         error("Could not open the profile to write to");
     }
+    f.close();
 }
 
 void QQMlDom::makeREADMEFile(const QString rootDir, const QString projectName)
@@ -372,6 +374,7 @@ void QQMlDom::makeREADMEFile(const QString rootDir, const QString projectName)
     }else{
         error("Could not open the profile to write to") ;
     }
+    f.close();
 }
 
 void QQMlDom::makeQSFile(const QString rootDir, const QString projectName)
@@ -384,6 +387,7 @@ void QQMlDom::makeQSFile(const QString rootDir, const QString projectName)
     }else{
         error("Could not open the profile to write to") ;
     }
+    f.close();
 }
 
 void QQMlDom::makeLicenseFile(const QString rootDir, const QString projectName)
@@ -396,6 +400,7 @@ void QQMlDom::makeLicenseFile(const QString rootDir, const QString projectName)
     }else{
         error("Could not open the profile to write to") ;
     }
+    f.close();
 }
 
 void QQMlDom::addependTextById(QDomDocument nDocument, QString element, QString text)

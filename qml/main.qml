@@ -15,24 +15,24 @@ ApplicationWindow{
     toolBar: ToolBar{
         id: panelButtons
         visible: false
-//        RowLayout {
-//            anchors.fill: parent
-//            ToolButton {
-//                iconSource: "new.png"
-//            }
-//            ToolButton {
-//                iconSource: "open.png"
-//            }
-//            ToolButton {
-//                iconSource: "save-as.png"
-//            }
-//            Item { Layout.fillWidth: true }
-//            CheckBox {
-//                text: "Enabled"
-//                checked: true
-//                Layout.alignment: Qt.AlignRight
-//            }
-//        }
+        //        RowLayout {
+        //            anchors.fill: parent
+        //            ToolButton {
+        //                iconSource: "new.png"
+        //            }
+        //            ToolButton {
+        //                iconSource: "open.png"
+        //            }
+        //            ToolButton {
+        //                iconSource: "save-as.png"
+        //            }
+        //            Item { Layout.fillWidth: true }
+        //            CheckBox {
+        //                text: "Enabled"
+        //                checked: true
+        //                Layout.alignment: Qt.AlignRight
+        //            }
+        //        }
     }
 
     statusBar:Rectangle{
@@ -59,14 +59,17 @@ ApplicationWindow{
 
     Loader{
         id:mainLoader
-        width: parent.width ///- leftBar.width
+        width: parent.width
         height: parent.hight
         source: "WizardStyle.qml"
     }
 
 
     Component.onCompleted: {
-        domWriter.downloadPrebuilt("2.0.1")
+        domWriter.downloadPrebuilt("2.0.1");
+        if (domWriter.hasTheBinaryPath() === false){
+            noQtBinaryDialog.open();
+        }
     }
 
     QQmlDom{
@@ -74,20 +77,25 @@ ApplicationWindow{
         onError: errorDialog.open()
     }
 
-    Dialog {
-         id: errorDialog
-         visible: false
-         title: "Error "
+    SetupQtInstallerFramwaork{
+        id: noQtBinaryDialog
+        visible: false
 
-         contentItem: Rectangle {
-             color: "lightskyblue"
-             implicitWidth: 400
-             implicitHeight: 100
-             Text {
-                 text: "Hello blue sky!"
-                 color: "navy"
-                 anchors.centerIn: parent
-             }
-         }
-     }
+
+    }
+
+    Dialog {
+        id: errorDialog
+        visible: false
+        title: "Error "
+        contentItem: Rectangle {
+            color: palette.base
+            implicitWidth: 400
+            implicitHeight: 100
+            Text {
+                color: "navy"
+                anchors.centerIn: parent
+            }
+        }
+    }
 }

@@ -11,5 +11,7 @@
         <file>artwork/Classic.png</file>
         <file>artwork/Mac.png</file>
         <file>artwork/Modern.png</file>
+        <file>SetupQtInstallerFramwaork.qml</file>
+        <file>LoaderHelper.qml</file>
     </qresource>
 </RCC>

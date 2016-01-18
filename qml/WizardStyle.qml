@@ -70,9 +70,12 @@ Rectangle{
             height: wView.cellHeight
             icon: "artwork/"+tx+".png"
             onClicked:{
+                if (domWriter.hasTheBinaryPath() === false){
+                    noQtBinaryDialog.open();
+                }else{
                 root.wizardStyle = tx
                 mainLoader.source = "StartHere.qml"
-
+                }
             }
 
         }

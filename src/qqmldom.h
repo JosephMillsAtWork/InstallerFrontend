@@ -53,6 +53,8 @@ public:
     explicit QQMlDom(QObject *parent = 0);
 
 
+    QString errorString();
+
     bool staticBuild();
     void setStaticBuild(const bool &staticBuild);
 
@@ -64,6 +66,8 @@ public:
     QString binaryLoaction()const;
     void setBinaryCreatorLocation(const QString &binaryLoaction);
     Q_INVOKABLE bool hasTheBinaryPath() const;
+//    Q_INVOKABLE void setBinaryPath();
+
 
     Q_INVOKABLE void writeConfigPage(const QString path);
     Q_INVOKABLE void writePackagePage(const QString path);
