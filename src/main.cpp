@@ -27,9 +27,11 @@ int main(int argc, char *argv[])
 
     QString downloadDir = QStandardPaths::standardLocations(QStandardPaths::DownloadLocation).first();
     QString buildDefaultDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).first();
+    QString homeDir = QStandardPaths::standardLocations(QStandardPaths::HomeLocation).first();
 
     engine.rootContext()->setContextProperty("buildDefaultDir",buildDefaultDir);
     engine.rootContext()->setContextProperty("downloadDir",downloadDir);
+    engine.rootContext()->setContextProperty("homeDir",homeDir);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

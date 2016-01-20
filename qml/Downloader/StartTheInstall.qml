@@ -36,10 +36,9 @@ Column{
             console.log("Message "  + message)
         }
         onFinished: {
-//            console.log(exitStatus)
-//            if(exitStatus == 0){
-                permissionsText.text = qsTr("Ok Now that you have installed the Qt Installer Framework. You must set where it is installed so that any time you open this application again you dpo not need to set it again" )
-//            }
+            busy.running = false
+            permissionsText.text = qsTr("Ok Now that you have installed the Qt Installer Framework. You must set where it is installed so that any time you open this application again you dpo not need to set it again" )
+            downloaderLoader.source = "QtIfwBinarySettings.qml"
         }
 
         onError: console.log(errorString)
@@ -72,12 +71,6 @@ Column{
         onFinished:{console.log("DONE CHANGING PERMISSIONS "); ifwTimer.start()}
         onRunning:  console.log("changing permissions of the file ")
         runType: QQmlProcess.Attached
-//        onFinished: {
-//            console.log(exitStatus)
-//            if(exitStatus == 0){
-//                ifwTimer.start()
-//            }
-//        }
     }
     Timer{
         id:ifwTimer

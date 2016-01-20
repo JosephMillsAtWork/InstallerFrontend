@@ -86,11 +86,6 @@ ApplicationWindow{
 
     }
 
-
-
-
-
-
     Dialog {
         id: errorDialog
         visible: false
@@ -105,4 +100,23 @@ ApplicationWindow{
             }
         }
     }
+
+
+
+
+//    FileDialog {
+//         id: binaryDialog
+//         title: "Please chose binarycreator"
+//         visible: false
+//         folder: homeDir
+//         nameFilters: ["binarycreator"]
+//         onAccepted: {
+//             console.log("You chose: " + fileDialog.fileUrls)
+
+//             //             domWriter.setBinaryCreatorLocation()
+//         }
+//         Component.onCompleted: visible = false
+//     }
+
+
 }

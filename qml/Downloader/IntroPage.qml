@@ -25,7 +25,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("I already Have Qt Installer Framework installed to this Machine")
             onClicked: {
-                downloaderLoader.source = ""
+                downloaderLoader.source = "qrc:/QSettings/QtIfwBinarySettings.qml"
             }
         }
         Button{
