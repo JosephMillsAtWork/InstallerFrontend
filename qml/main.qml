@@ -12,6 +12,8 @@ ApplicationWindow{
     height: Screen.height / 2
     color: palette.midlight
     property string wizardStyle
+    property string downloadQtIFW
+    property string qtIFWFIle
     toolBar: ToolBar{
         id: panelButtons
         visible: false
@@ -66,7 +68,7 @@ ApplicationWindow{
 
 
     Component.onCompleted: {
-        domWriter.downloadPrebuilt("2.0.1");
+//        filePermissions.checkPermissions()//downloadPrebuilt("2.0.1");
         if (domWriter.hasTheBinaryPath() === false){
             noQtBinaryDialog.open();
         }
@@ -83,6 +85,11 @@ ApplicationWindow{
 
 
     }
+
+
+
+
+
 
     Dialog {
         id: errorDialog

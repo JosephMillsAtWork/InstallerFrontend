@@ -2,6 +2,7 @@
 QQMlDom::QQMlDom(QObject *parent) : QObject(parent)
 {
     connect(this,SIGNAL(error(QString)),this,SLOT(handleError(QString)));
+    setPrebuiltVersions();
 }
 
 QString QQMlDom::errorString()
@@ -22,44 +23,120 @@ void QQMlDom::setStaticBuild(const bool &staticBuild)
     emit staticBuildChanged();
 }
 
-void QQMlDom::downloadPrebuilt(const QString version)
+void QQMlDom::setCorrectPreBuilt(const QString version)
 {
+
     QSysInfo info;
+
+
+    // FIXME need to either let the user pick out the mirror
+    // Or we need to use something to set the mirror
+    //
+
+//    int utcOffSet;
+//    QDateTime dt1 = QDateTime::currentDateTime();
+//    QDateTime dt2 = dt1.toUTC();
+//    dt1.setTimeSpec(Qt::UTC);
+
+//    int offset = dt2.secsTo(dt1) / 3600;
+
+
+//    utcOffSet = offset;
+
+
+
+//    QString defaultPath;
+//    switch (utcOffSet) {
+
+//    case -8|"-7"|"-6"|"-5":
+//        defaultPath = QString("%1%2/").arg("https://download.qt.io/official_releases/qt-installer-framework/").arg(version);
+//        break;
+//    case "":
+//        break;
+//    }
+
+QString defaultPath = QString("%1%2/").arg("https://download.qt.io/official_releases/qt-installer-framework/").arg(version);
+
+//   = c
     QString os;
-    QString system;
+    QString downloadFullPath;
     os = info.kernelType().toLatin1();
     QString arch = info.buildCpuArchitecture();
-
-    if (os == "darwin")
-    {
-        system = "mac";
-    }
-    else if ( os == "linux")
+    if ( os == "linux")
     {
         if(arch == "x86_64"){
-            system = "linux64";
-            qDebug() << "Suggested Donload  qt-installer-framework-opensource-2.0.1-x64.run";
+
+            downloadFullPath = QString("%1%2%3%4")
+                    .arg(defaultPath)
+                    .arg("qt-installer-framework-opensource-")
+                    .arg(version)
+                    .arg("-x64.run");
+
+            if (downloadFullPath == m_correctPrebuiltUrl)
+                return;
+            m_correctPrebuiltUrl = downloadFullPath;
+            qDebug() << downloadFullPath;
         }
         //FIXME error check for arm and what not
         else
         {
-            system = "linux32";
-            qDebug() << "Suggested Donload  qt-installer-framework-opensource-2.0.1-x86.run";
+            downloadFullPath = QString("%1%2%3%4")
+                    .arg(defaultPath)
+                    .arg("qt-installer-framework-opensource-")
+                    .arg(version)
+                    .arg("-x86.run");
+            if (downloadFullPath == m_correctPrebuiltUrl)
+                return;
+            m_correctPrebuiltUrl = downloadFullPath;
+            qDebug() << downloadFullPath;
         }
     }
     else if (os == "wince" || os == "winnt")
     {
-        system = "doz";
+        downloadFullPath = QString("%1%2%3%4")
+                .arg(defaultPath)
+                .arg("Qt Installer Framework Opensource ")
+                .arg(version)
+                .arg(".exe");
+        if (downloadFullPath == m_correctPrebuiltUrl)
+            return;
+        m_correctPrebuiltUrl = downloadFullPath;
+        qDebug() << downloadFullPath;
+
+    }
+    else if (os == "darwin" )
+    {
+        downloadFullPath = QString("%1%2%3%4")
+                .arg(defaultPath)
+                .arg(" Qt Installer Framework Opensource ")
+                .arg(version)
+                .arg(".dmg");
+        if (downloadFullPath == m_correctPrebuiltUrl)
+            return;
+        m_correctPrebuiltUrl = downloadFullPath;
+        qDebug() << downloadFullPath;
+    }
+    else
+    {
+        error("Can not set the correct version of Qt IFW Maybe your OS is not supported");
     }
 }
 
-
-QStringList QQMlDom::getPrebuiltOptions()
+QString QQMlDom::getCorrectPreBuilt()
 {
-    QStringList versions;
-    versions.clear();
-    versions << "2.0.1" << "2.0.0";
-    return versions;
+    return m_correctPrebuiltUrl;
+}
+
+
+QStringList QQMlDom::getPrebuiltVersions()
+{
+    return m_preBuildVersions;
+}
+
+void QQMlDom::setPrebuiltVersions()
+{
+    m_preBuildVersions.clear();
+    m_preBuildVersions << "2.0.1" << "2.0.0";
 }
 
 QString QQMlDom::binaryLoaction() const
@@ -455,6 +532,12 @@ void QQMlDom::removeNodeById(QDomElement nDocument, QString element)
     QDomNode rrUrl = rUrl.parentNode();
     qDebug() << "is there a child node ?"  << rrUrl.hasChildNodes() <<"  " << rrUrl.childNodes().at(0).nodeName() ;
     rrUrl.removeChild(rrUrl.childNodes().at(0));
+}
+
+void QQMlDom::gCC()
+{
+
+
 }
 
 void QQMlDom::handleError(const QString err)

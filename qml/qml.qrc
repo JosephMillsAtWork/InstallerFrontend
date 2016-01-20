@@ -13,5 +13,10 @@
         <file>artwork/Modern.png</file>
         <file>SetupQtInstallerFramwaork.qml</file>
         <file>LoaderHelper.qml</file>
+        <file>Downloader/DownloadQtIFW.qml</file>
+        <file>Downloader/IntroPage.qml</file>
+        <file>Downloader/DownloadPackage.qml</file>
+        <file>Downloader/StartTheInstall.qml</file>
+        <file>QSettings/QtIfwBinarySettings.qml</file>
     </qresource>
 </RCC>

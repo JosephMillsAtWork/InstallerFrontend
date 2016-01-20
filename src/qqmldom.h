@@ -10,6 +10,7 @@
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
 
+#include <QLocale>
 
 #include <QFile>
 #include <QList>
@@ -22,20 +23,7 @@
 #include <QSettings>
 
 
-#include "qnetworkscanner.h"
-
-/**********************************************************************
-* config.xml
-**********************************************************************/
-
-
-
-/**************************************************************************
- * Package.XML
- *************************************************************************/
-
-
-
+#include "qqmlnetwork.h"
 
 
 /*******************************************************************************
@@ -45,9 +33,13 @@
 class QQMlDom : public QObject
 {
     Q_OBJECT
+
     Q_PROPERTY(QString binaryLoaction READ binaryLoaction WRITE setBinaryCreatorLocation NOTIFY binaryLoactionChanged)
     Q_PROPERTY(bool staticBuild READ staticBuild WRITE setStaticBuild NOTIFY staticBuildChanged)
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
+    Q_PROPERTY(QStringList getPrebuiltVersions READ getPrebuiltVersions)
+    Q_PROPERTY(QString getCorrectPreBuilt READ getCorrectPreBuilt)
+
 
 public:
     explicit QQMlDom(QObject *parent = 0);
@@ -59,12 +51,15 @@ public:
     void setStaticBuild(const bool &staticBuild);
 
 
-    Q_INVOKABLE void downloadPrebuilt(const QString version);
-    QStringList getPrebuiltOptions();
+    QString getCorrectPreBuilt();
+    Q_INVOKABLE void setCorrectPreBuilt(const QString version);
 
+
+    QStringList getPrebuiltVersions();
+    void setPrebuiltVersions();
 
     QString binaryLoaction()const;
-    void setBinaryCreatorLocation(const QString &binaryLoaction);
+    Q_INVOKABLE void setBinaryCreatorLocation(const QString &binaryLoaction);
     Q_INVOKABLE bool hasTheBinaryPath() const;
 //    Q_INVOKABLE void setBinaryPath();
 
@@ -98,6 +93,7 @@ public:
    Q_INVOKABLE void removeDefaultNode(QDomElement nDocument ,QString element);
    Q_INVOKABLE void removeNodeById( QDomElement nDocument , QString element);
 
+    Q_INVOKABLE void gCC();
 signals:
     void error(QString);
     void binaryLoactionChanged();
@@ -114,6 +110,8 @@ private:
     QString m_binaryLocation;
     bool m_staticBuild;
     QString m_errorString;
+    QStringList m_preBuildVersions;
+    QString m_correctPrebuiltUrl;
 };
 
 #endif // QQMLDOM_H
